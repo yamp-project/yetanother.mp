@@ -1,15 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  Download,
-  Server,
-  FileText,
-  List,
-  Menu as MenuIcon,
-  X as CloseIcon,
-} from "lucide-vue-next";
+import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
 
-// Reactive state for mobile menu visibility
 const isMenuOpen = ref(false);
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
@@ -23,32 +15,34 @@ function toggleMenu() {
     >
       <div class="flex justify-start items-center gap-4 sm:gap-10">
         <!-- Logo -->
-        <div class="flex justify-center items-center gap-2.5">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20.6142 26.2313C19.6901 27.8889 17.3055 27.8892 16.381 26.2318L10.9763 16.5429C10.0905 14.9549 11.2385 13 13.0569 13C13.9143 13 14.7055 13.4607 15.1287 14.2064L20.6051 23.8549C21.0229 24.5911 21.0264 25.4919 20.6142 26.2313Z"
-              fill="#BC82F3"
-            />
-            <path
-              d="M26.133 16.4382C26.9738 14.8865 25.8504 13 24.0856 13C22.2823 13 21.1633 14.9614 22.0809 16.5137C23.002 18.0719 25.2707 18.0296 26.133 16.4382Z"
-              fill="#BC82F3"
-            />
-            <path
-              d="M37.0587 16.5353C37.9321 14.9448 36.7813 13 34.9668 13C34.0966 13 33.2953 13.4736 32.8758 14.236L22.1288 33.767C21.7421 34.4697 21.7326 35.3193 22.1035 36.0304C22.9885 37.7273 25.4075 37.7532 26.3287 36.0757L37.0587 16.5353Z"
-              fill="#BC82F3"
-            />
-          </svg>
+        <RouterLink to="/">
+          <div class="flex justify-center items-center gap-2.5">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20.6142 26.2313C19.6901 27.8889 17.3055 27.8892 16.381 26.2318L10.9763 16.5429C10.0905 14.9549 11.2385 13 13.0569 13C13.9143 13 14.7055 13.4607 15.1287 14.2064L20.6051 23.8549C21.0229 24.5911 21.0264 25.4919 20.6142 26.2313Z"
+                fill="#BC82F3"
+              />
+              <path
+                d="M26.133 16.4382C26.9738 14.8865 25.8504 13 24.0856 13C22.2823 13 21.1633 14.9614 22.0809 16.5137C23.002 18.0719 25.2707 18.0296 26.133 16.4382Z"
+                fill="#BC82F3"
+              />
+              <path
+                d="M37.0587 16.5353C37.9321 14.9448 36.7813 13 34.9668 13C34.0966 13 33.2953 13.4736 32.8758 14.236L22.1288 33.767C21.7421 34.4697 21.7326 35.3193 22.1035 36.0304C22.9885 37.7273 25.4075 37.7532 26.3287 36.0757L37.0587 16.5353Z"
+                fill="#BC82F3"
+              />
+            </svg>
 
-          <div class="justify-start text-purple-400 text-2xl font-bold">
-            YAMP
+            <div class="justify-start text-purple-400 text-2xl font-bold">
+              YAMP
+            </div>
           </div>
-        </div>
+        </RouterLink>
 
         <!-- Nav Items (hidden on small screens) -->
         <div class="hidden md:flex justify-start items-center gap-2.5">
@@ -95,7 +89,10 @@ function toggleMenu() {
 
       <!-- Right Side Links (hide on extra-small) -->
       <div class="hidden sm:flex justify-center items-center gap-2.5">
-        <div
+        <a
+          href="https://discord.gg/invite/yamp"
+          target="_blank"
+          rel="noopener noreferrer"
           class="w-32 h-10 px-4 py-2.5 bg-white/10 rounded-[10px] flex justify-center items-center gap-2.5 cursor-pointer hover:bg-white/15 transition-colors"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -106,8 +103,11 @@ function toggleMenu() {
           <div class="justify-start text-white text-base font-medium">
             Discord
           </div>
-        </div>
-        <div
+        </a>
+        <a
+          href="https://github.com/yamp-project"
+          target="_blank"
+          rel="noopener noreferrer"
           class="w-32 h-10 px-4 py-2.5 bg-white/10 rounded-[10px] flex justify-center items-center gap-2.5 cursor-pointer hover:bg-white/15 transition-colors"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ function toggleMenu() {
           <div class="justify-start text-white text-base font-medium">
             Github
           </div>
-        </div>
+        </a>
       </div>
 
       <!-- Hamburger button (visible < md) -->
