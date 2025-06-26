@@ -22,7 +22,6 @@ function toggleMenu() {
               <path d="M26.133 16.4382C26.9738 14.8865 25.8504 13 24.0856 13C22.2823 13 21.1633 14.9614 22.0809 16.5137C23.002 18.0719 25.2707 18.0296 26.133 16.4382Z" fill="#BC82F3" />
               <path d="M37.0587 16.5353C37.9321 14.9448 36.7813 13 34.9668 13C34.0966 13 33.2953 13.4736 32.8758 14.236L22.1288 33.767C21.7421 34.4697 21.7326 35.3193 22.1035 36.0304C22.9885 37.7273 25.4075 37.7532 26.3287 36.0757L37.0587 16.5353Z" fill="#BC82F3" />
             </svg>
-            <div class="justify-start text-purple-400 text-2xl font-bold">YAMP</div>
           </div>
         </RouterLink>
       </div>
@@ -89,9 +88,6 @@ function toggleMenu() {
 <style scoped>
 .nav-with-grid {
   background-image: linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 0;
 }
 
 .slide-fade-enter-active,
