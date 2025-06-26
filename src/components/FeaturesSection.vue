@@ -32,12 +32,12 @@ const features: Feature[] = [
     description:
       "Designed to be approachable for modders, communities, and newcomers alike.",
   },
-  {
-    icon: "mdi:shield-check",
-    title: "Built-in Anti-Cheat",
-    description:
-      "Integrated security measures to protect both players and developers.",
-  },
+  // {
+  //   icon: "mdi:shield-check",
+  //   title: "Built-in Anti-Cheat",
+  //   description:
+  //     "Integrated security measures to protect both players and developers.",
+  // },
 ];
 </script>
 
@@ -45,7 +45,7 @@ const features: Feature[] = [
   <section class="w-full max-w-6xl mx-auto mb-20 px-4">
     <h2 class="text-center text-3xl sm:text-4xl font-bold mb-12">Why YAMP?</h2>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
     >
       <div
         v-for="feature in features"
