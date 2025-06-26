@@ -3,7 +3,6 @@ import { Icon } from "@iconify/vue";
 </script>
 
 <template>
-  <!-- Hero Section -->
   <div class="text-center max-w-6xl mx-auto mt-20 mb-16">
     <h1 class="text-4xl sm:text-6xl md:text-8xl font-bold mb-6">
       Yet Another
@@ -15,7 +14,6 @@ import { Icon } from "@iconify/vue";
       performance.
     </p>
 
-    <!-- Action Buttons -->
     <div class="flex flex-col mb-2 gap-4">
       <span class="text-4xl font-bold">Coming soon</span>
       <span class="text-sm opacity-75">In the meantime</span>

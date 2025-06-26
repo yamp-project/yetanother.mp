@@ -1,0 +1,40 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # Adjust if your default branch is different
+  workflow_dispatch: {}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DIR: dist
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build project
+        run: bun run build
+
+      - name: Deploy to server via rsync
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: -avzr --delete
+          path: "${{ env.BUILD_DIR }}/"
+          remote_path: "/var/www/yetanother.mp/"
+          remote_host: ${{ secrets.VPN_HOST }}
+          remote_user: ${{ secrets.VPN_USER }}
+          remote_port: ${{ secrets.VPN_PORT }} # defaults to 22
+          remote_key: ${{ secrets.VPN_SSH_KEY }}
