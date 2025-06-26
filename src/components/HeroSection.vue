@@ -22,10 +22,12 @@ onUnmounted(() => clearTimeout(timer))
   <div class="text-center max-w-4xl mx-auto mt-20 mb-16">
     <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
       <!-- Top line offset to align "Another" with "Platform" -->
-      <div class="flex justify-center items-baseline" style="transform: translateX(80px);">
+      <div class="flex justify-center items-baseline" style="transform: translateX(28px);">
         <span class="mr-4">Yet</span>
         <span>Another</span>
-        <span class="relative overflow-hidden inline-block h-[1.3em] w-[12ch] ml-4">
+      </div>
+      <div class="flex justify-center items-baseline" style="transform: translateX(73px) translateY(10px);">
+        <span class="relative overflow-hidden inline-block h-[1.3em] w-[12ch]">
           <div
             class="transition-transform duration-700 ease-in-out"
             :style="{ transform: `translateY(-${currentIndex * 1.3}em)` }"
@@ -41,8 +43,6 @@ onUnmounted(() => clearTimeout(timer))
           </div>
         </span>
       </div>
-
-      <!-- Bottom line: perfectly centered -->
       <div class="mt-2">Platform.</div>
     </h1>
 
