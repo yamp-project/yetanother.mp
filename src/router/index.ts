@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+// Optional: keep GSAP ScrollSmoother in sync when the route changes
+import ScrollSmoother from "gsap/ScrollSmoother";
 
 // Pages
 import LandingPage from "../pages/LandingPage.vue";
@@ -24,6 +26,11 @@ const router = createRouter({
     if (savedPosition) return savedPosition;
     return { top: 0 };
   },
+});
+
+// When the route changes, refresh ScrollSmoother so it recalculates heights
+router.afterEach(() => {
+  ScrollSmoother.get()?.refresh();
 });
 
 export default router;
