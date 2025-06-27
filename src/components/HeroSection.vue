@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue'
 const suffixes = ['*','ultiplayer', 'odification', 'odding']
 const currentIndex = ref(0)
 
-let timer: NodeJS.Timeout
+let timer: ReturnType<typeof setTimeout>
 
 const cycle = () => {
   timer = setTimeout(() => {
