@@ -3,14 +3,14 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main # Adjust if your default branch is different
+      - main
   workflow_dispatch: {}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      BUILD_DIR: dist
+      BUILD_DIR: .
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Build project
+      - name: Build project (client & server bundles)
         run: bun run build
 
       - name: Deploy to server via rsync

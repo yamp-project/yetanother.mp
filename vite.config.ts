@@ -15,4 +15,8 @@ export default defineConfig({
       "@": resolve(__dirname, "./src"),
     },
   },
+  ssr: {
+    // Bundle GSAP into the SSR build so Node doesn't re-evaluate it as a loose ESM
+    noExternal: ["gsap"],
+  },
 })
