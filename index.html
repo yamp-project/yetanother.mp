@@ -5,9 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/yamp.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yet Another M* Platform</title>
+    <!-- Eagerly load global styles to avoid FOUC during dev SSR -->
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app"><!--ssr-outlet--></div>
+    <!--preload-links-->
+    <script type="module" src="/src/entry-client.ts"></script>
   </body>
 </html>

@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "dev": "node server.js",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.ts",
+    "build": "vue-tsc -b && bun run build:client && bun run build:server",
+    "preview": "node server.js",
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
@@ -17,7 +20,10 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.17",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "@vue/server-renderer": "^3.5.17",
+    "express": "^4.19.2",
+    "compression": "^1.7.4"
   },
   "devDependencies": {
     "@types/node": "^20.12.14",
