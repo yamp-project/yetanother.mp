@@ -4,7 +4,7 @@ import { Icon } from "@iconify/vue";
 
 <template>
   <div class="text-center max-w-4xl mx-auto mt-20 mb-16">
-    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 mt-10 sm:mt-0">
       Yet Another
       <span class="text-purple-400">M*</span>
       Platform.
