@@ -23,6 +23,12 @@ import heroBlurImage from "@/assets/hero-bottom-blur.webp";
   overflow: hidden;
 }
 
+.hero-bottom-blur img {
+  -webkit-user-drag: none;
+  position: relative;
+  z-index: 0;
+}
+
 /* Fade-in animation */
 .blur-fade-enter-active {
   transition: all 1.2s ease-out;
