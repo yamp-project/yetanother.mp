@@ -12,7 +12,7 @@ import AboutSection from "../components/AboutSection.vue";
     class="relative flex flex-col items-center justify-center min-h-[calc(100vh)] px-4"
   >
     <div
-      class="w-[838px] h-[838px] absolute left-1/2 top-[-738px] transform -translate-x-1/2 bg-gradient-to-b from-stone-400 to-purple-400 rounded-full blur-[374.50px] opacity-80 pointer-events-none"
+      class="w-[838px] h-[838px] max-w-full absolute left-1/2 top-[-738px] transform -translate-x-1/2 bg-gradient-to-b from-stone-400 to-purple-400 rounded-full blur-[374.50px] opacity-80 pointer-events-none"
     ></div>
 
     <HeroSection />
