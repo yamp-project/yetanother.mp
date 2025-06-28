@@ -9,6 +9,14 @@ import { useGsap } from "./plugins/gsap";
 const { ScrollSmoother } = useGsap();
 
 onMounted(() => {
+  // disable smooth scrolling on mobile
+  const isMobile =
+    window.matchMedia("(pointer: coarse)").matches ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  if (isMobile) return;
+
   // Respect users that prefer reduced motion
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
