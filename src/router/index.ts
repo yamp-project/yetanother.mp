@@ -19,8 +19,12 @@ export const routes = [
   },
 ];
 
+// Detect whether we are running in a browser (window available). Vite sets `import.meta.env.SSR` during
+// its own server build, but external runtimes (e.g., Bun/Node scripts) won't.
+const isBrowser = typeof window !== "undefined";
+
 const router = createRouter({
-  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
+  history: isBrowser ? createWebHistory() : createMemoryHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
     if (savedPosition) return savedPosition;
