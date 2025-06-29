@@ -1,14 +1,18 @@
 import { renderToString } from "@vue/server-renderer";
 import { createVueApp } from "./app";
+import { renderHeadToString } from "@vueuse/head";
 
-export async function render(url: string, manifest?: Record<string, string[]>): Promise<[string, string]> {
-  const { app, router } = createVueApp();
+export async function render(url: string, manifest?: Record<string, string[]>): Promise<[string, string, string]> {
+  const { app, router, head } = createVueApp();
 
   router.push(url);
   await router.isReady();
 
   const ctx: { modules?: Set<string> } = {};
   const html = await renderToString(app, ctx);
+
+  // Serialize head on the server
+  const { headTags } = renderHeadToString(head);
 
   let preloadLinks = "";
   if (manifest && ctx.modules) {
@@ -18,7 +22,7 @@ export async function render(url: string, manifest?: Record<string, string[]>): 
     }
   }
 
-  return [html, preloadLinks];
+  return [html, preloadLinks, headTags];
 }
 
 function renderPreloadLinks(

@@ -17,7 +17,6 @@ onMounted(() => {
     );
   if (isMobile) return;
 
-  // Respect users that prefer reduced motion
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;

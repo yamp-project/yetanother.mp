@@ -1,3 +1,36 @@
+<script setup lang="ts">
+import { useHead } from "@vueuse/head";
+
+useHead({
+  title: "Terms of Service – YAMP",
+  meta: [
+    {
+      name: "description",
+      key: "description",
+      content:
+        "Read the official Terms of Service for YAMP, the GTA V multiplayer client.",
+    },
+    {
+      key: "og:title",
+      property: "og:title",
+      content: "Terms of Service – YAMP",
+    },
+    {
+      key: "og:description",
+      property: "og:description",
+      content: "Read the official Terms of Service for YAMP.",
+    },
+    {
+      key: "og:url",
+      property: "og:url",
+      content: "https://yetanother.mp/terms-of-use",
+    },
+    { key: "og:image", property: "og:image", content: "/og-default.jpg" },
+  ],
+  link: [{ rel: "canonical", href: "https://yetanother.mp/terms-of-use" }],
+});
+</script>
+
 <template>
   <section class="px-4 md:px-24 lg:px-32 py-30 text-white">
     <h1 class="text-4xl font-bold mb-8">Terms of Service</h1>
