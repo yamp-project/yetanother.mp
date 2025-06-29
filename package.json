@@ -9,21 +9,23 @@
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.ts",
     "build": "vue-tsc -b && bun run build:client && bun run build:server",
     "preview": "node server.js",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "postbuild": "bun scripts/generate-sitemap.ts"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "^4.1.10",
+    "@vue/server-renderer": "^3.5.17",
+    "@vueuse/head": "^2.0.0",
     "autoprefixer": "^10.4.21",
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
     "gsap": "^3.13.0",
     "lucide-vue-next": "^0.515.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.10",
     "vue": "^3.5.17",
-    "vue-router": "^4.5.1",
-    "@vue/server-renderer": "^3.5.17",
-    "express": "^4.19.2",
-    "compression": "^1.7.4"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.14",
