@@ -7,7 +7,7 @@ import ScrollSmoother from "gsap/ScrollSmoother";
 import LandingPage from "../pages/LandingPage.vue";
 import TermsOfUse from "../pages/TermsOfUse.vue";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "Landing",
