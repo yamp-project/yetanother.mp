@@ -12,7 +12,7 @@ export async function render(url: string, manifest?: Record<string, string[]>): 
   const html = await renderToString(app, ctx);
 
   // Serialize head on the server
-  const { headTags } = renderHeadToString(head);
+  const { headTags } = await renderHeadToString(head);
 
   let preloadLinks = "";
   if (manifest && ctx.modules) {

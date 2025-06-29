@@ -1,37 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import NavigationBar from "./components/NavigationBar.vue";
 import BackgroundGrid from "./components/BackgroundGrid.vue";
 import HeroBottomBlur from "./components/HeroBottomBlur.vue";
 import Footer from "./components/Footer.vue";
-import { useGsap } from "./plugins/gsap";
-
-const { ScrollSmoother } = useGsap();
-
-onMounted(() => {
-  // disable smooth scrolling on mobile
-  const isMobile =
-    window.matchMedia("(pointer: coarse)").matches ||
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-  if (isMobile) return;
-
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-  if (prefersReduced) return;
-
-  // Initialise once (HMR-safe)
-  if (!ScrollSmoother.get()) {
-    ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.2,
-      effects: true,
-    });
-  }
-});
 </script>
 
 <template>
