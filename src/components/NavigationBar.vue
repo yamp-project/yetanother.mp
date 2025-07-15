@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
+import AlphaAccessButton from "./AlphaAccessButton.vue";
 
 const isMenuOpen = ref(false);
 function toggleMenu() {
@@ -94,6 +95,9 @@ function toggleMenu() {
             />
           </svg>
         </a>
+
+        <!-- Closed alpha / login button (desktop) -->
+        <AlphaAccessButton showProfile />
       </div>
 
       <!-- Hamburger button (mobile) -->
@@ -141,6 +145,13 @@ function toggleMenu() {
           </svg>
           <span class="text-white">GitHub</span>
         </a>
+
+        <!-- Closed alpha / login button (mobile) -->
+        <AlphaAccessButton
+          showProfile
+          class="flex items-center gap-2 p-2 rounded hover:bg-white/5 transition-colors justify-center text-white w-full"
+          @click="toggleMenu"
+        />
       </div>
     </div>
   </transition>
