@@ -5,6 +5,7 @@ import ScrollIndicator from "../components/ScrollIndicator.vue";
 import HeroBottomBlur from "../components/HeroBottomBlur.vue";
 import FeaturesSection from "../components/FeaturesSection.vue";
 import AboutSection from "../components/AboutSection.vue";
+import AlphaAccessSection from "../components/AlphaAccessSection.vue";
 import { useHead } from "@vueuse/head";
 
 useHead({
@@ -63,6 +64,7 @@ useHead({
     <StatsSection />
     <ScrollIndicator />
   </div>
+  <AlphaAccessSection />
   <FeaturesSection />
   <AboutSection />
   <HeroBottomBlur class="absolute bottom-0" />

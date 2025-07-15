@@ -3,11 +3,20 @@ import NavigationBar from "./components/NavigationBar.vue";
 import BackgroundGrid from "./components/BackgroundGrid.vue";
 import HeroBottomBlur from "./components/HeroBottomBlur.vue";
 import Footer from "./components/Footer.vue";
+
+import { onMounted } from "vue";
+import { useAuth } from "./composables/useAuth";
+
+// Kick off auth state initialisation in the browser.
+const { refresh } = useAuth();
+onMounted(() => {
+  refresh();
+});
 </script>
 
 <template>
-  <div id="smooth-wrapper" class="relative overflow-x-hidden">
-    <div id="smooth-content" class="text-white bg-zinc-950 relative">
+  <div class="relative overflow-x-hidden">
+    <div class="text-white bg-zinc-950 relative">
       <BackgroundGrid class="pointer-events-none" />
       <NavigationBar class="z-50" />
 
