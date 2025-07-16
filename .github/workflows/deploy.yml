@@ -38,3 +38,20 @@ jobs:
           remote_user: ${{ secrets.VPN_USER }}
           remote_port: ${{ secrets.VPN_PORT }} # defaults to 22
           remote_key: ${{ secrets.VPN_SSH_KEY }}
+
+      - name: Setup environment and restart service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPN_HOST }}
+          username: ${{ secrets.VPN_USER }}
+          key: ${{ secrets.VPN_SSH_KEY }}
+          port: ${{ secrets.VPN_PORT }}
+          script: |
+            cd /var/www
+            # Create .env file
+            cat > .env << 'EOF'
+            VPN_HOST=${{ secrets.VPN_HOST }}
+            VPN_USER=${{ secrets.VPN_USER }}
+            VPN_PORT=${{ secrets.VPN_PORT }}
+            VPN_SSH_KEY=${{ secrets.VPN_SSH_KEY }}
+            EOF
