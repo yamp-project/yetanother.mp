@@ -59,14 +59,14 @@ async function createServer() {
           )
         : undefined;
 
-      const [appHtml, preloadLinks, headTags] = await render(url, manifest);
+      const [appHtml, preloadLinks, headTags, statusCode] = await render(url, manifest);
 
       const html = template
         .replace(`<!--preload-links-->`, preloadLinks || "")
         .replace(`<!--head-tags-->`, headTags || "")
         .replace(`<!--ssr-outlet-->`, appHtml);
 
-      res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      res.status(statusCode).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
       if (!isProd && vite) {
         vite.ssrFixStacktrace(e);
@@ -82,4 +82,4 @@ async function createServer() {
   });
 }
 
-createServer(); 
+createServer();

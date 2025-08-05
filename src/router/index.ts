@@ -5,6 +5,7 @@ import {
 } from "vue-router";
 import LandingPage from "../pages/LandingPage.vue";
 import TermsOfUse from "../pages/TermsOfUse.vue";
+import NotFound from "../pages/NotFound.vue";
 
 export const routes = [
   {
@@ -16,6 +17,11 @@ export const routes = [
     path: "/terms-of-use",
     name: "TermsOfUse",
     component: TermsOfUse,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 
