@@ -2,12 +2,14 @@ import { renderToString } from "@vue/server-renderer";
 import { createVueApp } from "./app";
 import { renderHeadToString } from "@vueuse/head";
 
-export async function render(url: string, manifest?: Record<string, string[]>): Promise<[string, string, string]> {
+export async function render(url: string, manifest?: Record<string, string[]>): Promise<[string, string, string, number]> {
   const { app, router, head } = createVueApp();
 
   router.push(url);
   await router.isReady();
 
+  const statusCode = router.currentRoute.value.name === "NotFound" ? 404 : 200;
+  
   const ctx: { modules?: Set<string> } = {};
   const html = await renderToString(app, ctx);
 
@@ -22,7 +24,7 @@ export async function render(url: string, manifest?: Record<string, string[]>): 
     }
   }
 
-  return [html, preloadLinks, headTags];
+  return [html, preloadLinks, headTags, statusCode];
 }
 
 function renderPreloadLinks(
@@ -44,4 +46,4 @@ function renderPreloadLinks(
     }
   }
   return links;
-} 
+}
