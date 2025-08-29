@@ -88,10 +88,17 @@ const getStatusTitle = (status: string | null) => {
           </p>
           <div class="bg-zinc-900/50 border border-white/10 rounded-lg p-4 max-w-md mx-auto">
             <h3 class="text-white font-semibold mb-2">Requirements</h3>
-            <div class="text-white/80 text-sm space-y-1">
-              <p>• Active Discord account</p>
-              <p>• Member of YAMP Discord server</p>
-              <p>• "Yamper" role assigned</p>
+            <div class="text-white/80 text-sm space-y-1 flex flex-col items-center">
+              <span>• Active Discord account</span>
+              <span>• Member of YAMP Discord server</span>
+              <div class="flex gap-1">
+                <span>•</span>
+                <div class="flex">
+                  <img class="w-5" src="/yamper.webp" />
+                  <span class="text-[#1abc9c] font-bold">Yamper</span>
+                </div>
+                <span>role assigned</span>
+              </div>
             </div>
           </div>
         </div>

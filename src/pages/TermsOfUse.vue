@@ -34,7 +34,7 @@ useHead({
 <template>
   <section class="px-4 md:px-24 lg:px-32 py-30 text-white">
     <h1 class="text-4xl font-bold mb-8">Terms of Service</h1>
-    <article class="article-content prose prose-invert max-w-none">
+    <article class="article-content prose prose-invert max-w-none text-justify">
       <h2>1. PRELIMINARY PROVISIONS</h2>
       <h3>Precision of terms used</h3>
       <ol class="pl-6 space-y-2">

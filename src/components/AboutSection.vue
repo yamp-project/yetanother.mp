@@ -1,7 +1,7 @@
 <template>
   <section class="relative z-2 px-4 md:px-24 lg:px-32 py-30 text-white">
     <h1 class="text-4xl sm:text-5xl font-bold mb-12 text-center">About YAMP</h1>
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-3xl mx-auto text-justify">
       <p class="text-white/80 leading-relaxed mb-6 text-lg">
         Yet Another M* Platform (YAMP) is an independent, nonprofit third-party
         modding project dedicated to delivering the best experiences.
