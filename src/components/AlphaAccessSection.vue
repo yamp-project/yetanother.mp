@@ -91,6 +91,7 @@ const getStatusTitle = (status: string | null) => {
             <div class="text-white/80 text-sm space-y-1 flex flex-col items-center">
               <span>• Active Discord account</span>
               <span>• Member of YAMP Discord server</span>
+              <span>• Introduce yourself in #introduce-yourself</span>
               <div class="flex gap-1">
                 <span>•</span>
                 <div class="flex">
@@ -108,7 +109,8 @@ const getStatusTitle = (status: string | null) => {
             <h3 class="text-red-200 font-semibold mb-2">Access Requirements Not Met</h3>
             <div class="text-red-200/80 text-sm space-y-1">
               <p>• Join our Discord server</p>
-              <p>• Get the "Yamper" role</p>
+              <p>• Introduce yourself in #introduce-yourself channel</p>
+              <p>• Receive the "Yamper" role</p>
               <p>• Contact staff if you think this is an error</p>
             </div>
           </div>
