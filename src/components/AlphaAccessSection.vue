@@ -80,7 +80,7 @@ const getStatusTitle = (status: string | null) => {
 
       <!-- Call to Action -->
       <div class="flex flex-col items-center gap-6">
-        <AlphaAccessButton />
+        <AlphaAccessButton v-if="alphaApplication.status !== 'approved'" />
         
         <div v-if="!user" class="text-center">
           <p class="text-white/60 text-sm mb-4">
