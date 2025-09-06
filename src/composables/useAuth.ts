@@ -100,7 +100,10 @@ async function applyForAlpha() {
     login();
     return;
   }
-  if (!state.hasAlphaAccess) return; // Should not happen – backend blocks.
+  if (!state.hasAlphaAccess) {
+    console.warn("User does not have required Discord role for alpha access");
+    return;
+  }
 
   state.loading = true;
   try {
