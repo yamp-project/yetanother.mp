@@ -80,6 +80,7 @@ function handleClick() {
     
     <div class="flex flex-col items-end gap-2">
       <button
+        v-if="alphaApplication.status !== 'approved'"
         @click="handleClick"
         :disabled="buttonState.disabled"
         :class="buttonClass"

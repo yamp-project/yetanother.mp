@@ -2,7 +2,7 @@ import { reactive, toRefs } from "vue";
 
 // Centralised front-end access to YAMP auth / alpha application APIs
 // API lives on a separate sub-domain – always use absolute URLs and include credentials.
-const API_BASE = "https://api.yetanother.mp/v1";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://api.yetanother.mp/v1";
 
 interface User {
   id: string;
@@ -104,7 +104,7 @@ async function applyForAlpha() {
 
   state.loading = true;
   try {
-    const res = await fetch(`${API_BASE}/alpha/apply`, {
+    const res = await fetch(`${API_BASE}/alpha-access/apply`, {
       method: "POST",
       credentials: "include",
     });
@@ -129,7 +129,7 @@ async function withdrawApplication() {
 
   state.loading = true;
   try {
-    const res = await fetch(`${API_BASE}/alpha/apply`, {
+    const res = await fetch(`${API_BASE}/alpha-access/apply`, {
       method: "DELETE",
       credentials: "include",
     });
