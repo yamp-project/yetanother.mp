@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useAuth } from "../composables/useAuth";
-import UserProfile from "./UserProfile.vue";
-import StatusBadge from "./StatusBadge.vue";
-
-interface Props {
-  showProfile?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  showProfile: false,
-});
 
 const { 
   user, 
@@ -26,7 +16,7 @@ const buttonState = computed(() => {
   if (loading.value) return { text: "Loading…", disabled: true, action: null };
   if (!user.value) return { text: "Login with Discord", disabled: false, action: "login" };
   if (!hasAlphaAccess.value) return { text: "No Access", disabled: true, action: null };
-  
+
   switch (alphaApplication.value.status) {
     case "pending":
       return { text: "Withdraw Application", disabled: false, action: "withdraw" };
@@ -76,9 +66,9 @@ function handleClick() {
 
 <template>
   <div class="flex items-center gap-3">
-    <UserProfile v-if="props.showProfile && user" compact />
     
-    <div class="flex flex-col items-end gap-2">
+    
+    <div class="flex flex-col items-end">
       <button
         v-if="alphaApplication.status !== 'approved'"
         @click="handleClick"
@@ -92,12 +82,6 @@ function handleClick() {
         </svg>
         {{ buttonState.text }}
       </button>
-      
-      <StatusBadge 
-        v-if="user && alphaApplication.applied" 
-        :status="alphaApplication.status" 
-        size="sm" 
-      />
     </div>
   </div>
 </template>
