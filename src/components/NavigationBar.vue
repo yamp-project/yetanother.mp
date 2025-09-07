@@ -2,10 +2,23 @@
 import { ref } from "vue";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
 import AlphaAccessButton from "./AlphaAccessButton.vue";
+import StatusBadge from "./StatusBadge.vue";
+import UserProfile from "./UserProfile.vue";
+import { useAuth } from "../composables/useAuth";
+import router from "../router";
+
+const { 
+  user, 
+  alphaApplication, 
+} = useAuth();
 
 const isMenuOpen = ref(false);
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
+}
+
+function goToAlphaSection() {
+  router.push({ hash: '#alpha' });
 }
 </script>
 
@@ -97,7 +110,17 @@ function toggleMenu() {
         </a>
 
         <!-- Closed alpha / login button (desktop) -->
-        <AlphaAccessButton showProfile />
+        <UserProfile v-if="user" compact />
+        <div class="flex flex-col" v-if="user && alphaApplication.applied" >
+          <span class="text-sm text-white/30">Alpha Status</span>
+          <StatusBadge 
+            :status="alphaApplication.status" 
+            size="sm" 
+
+            class="cursor-pointer"
+            @click="goToAlphaSection"
+          />
+        </div>
       </div>
 
       <!-- Hamburger button (mobile) -->

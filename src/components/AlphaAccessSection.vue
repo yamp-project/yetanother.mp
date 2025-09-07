@@ -33,7 +33,7 @@ const getStatusTitle = (status: string | null) => {
 </script>
 
 <template>
-  <section class="py-20 px-4">
+  <section class="py-20 px-4" id="alpha">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">
         {{ getStatusTitle(alphaApplication.status) }}
