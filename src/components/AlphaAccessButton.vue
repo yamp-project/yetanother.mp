@@ -66,8 +66,6 @@ function handleClick() {
 
 <template>
   <div class="flex items-center gap-3">
-    
-    
     <div class="flex flex-col items-end">
       <button
         v-if="alphaApplication.status !== 'approved'"

@@ -112,10 +112,10 @@ function goToAlphaSection() {
         <!-- Closed alpha / login button (desktop) -->
         <UserProfile v-if="user" compact />
         <div class="flex flex-col" v-if="user && alphaApplication.applied" >
-          <span class="text-sm text-white/30">Alpha Status</span>
-          <StatusBadge 
+          <span class="text-[10px] text-center font-medium uppercase text-[#a87fcd] tracking-[0.9px]">Alpha Status</span>
+          <StatusBadge
             :status="alphaApplication.status" 
-            size="sm" 
+            size="sm"
 
             class="cursor-pointer"
             @click="goToAlphaSection"
