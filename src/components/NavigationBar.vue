@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
-import { Icon } from "@iconify/vue";
+// import { Icon } from "@iconify/vue";
 import AlphaAccessButton from "./AlphaAccessButton.vue";
 import StatusBadge from "./StatusBadge.vue";
 import UserProfile from "./UserProfile.vue";
