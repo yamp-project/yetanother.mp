@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
+import { Icon } from "@iconify/vue";
 import AlphaAccessButton from "./AlphaAccessButton.vue";
 import StatusBadge from "./StatusBadge.vue";
 import UserProfile from "./UserProfile.vue";
+import ChristmasLights from "./christmas/ChristmasLights.vue";
 import { useAuth } from "../composables/useAuth";
 import router from "../router";
 
@@ -25,8 +27,10 @@ function goToAlphaSection() {
 <template>
   <nav class="fixed top-0 left-0 right-0 flex justify-center items-center z-50">
     <div
-      class="w-full h-16 px-4 m-4.5 sm:px-5 rounded-[10px] outline outline-offset-[-1px] outline-white/10 flex justify-between items-center nav-with-grid backdrop-blur"
+      class="relative w-full h-16 px-4 m-4.5 sm:px-5 rounded-[10px] outline outline-offset-[-1px] outline-white/10 flex justify-between items-center nav-with-grid backdrop-blur"
     >
+      <!-- Christmas Lights -->
+      <ChristmasLights />
       <div class="flex justify-start items-center gap-4 sm:gap-10">
         <!-- Logo -->
         <RouterLink to="/">
@@ -57,6 +61,12 @@ function goToAlphaSection() {
 
       <!-- Right Side Links -->
       <div class="hidden sm:flex justify-center items-center gap-2.5">
+        <!-- <RouterLink
+          to="/roadmap"
+          class="flex justify-center items-center px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-white text-sm font-medium"
+        >
+          Roadmap
+        </RouterLink> -->
         <a
           href="https://discord.gg/invite/yamp"
           target="_blank"
@@ -140,6 +150,14 @@ function goToAlphaSection() {
       class="fixed top-16 left-0 right-0 bg-zinc-900/95 backdrop-blur py-4 md:hidden z-40"
     >
       <div class="flex flex-col px-4 gap-2">
+        <!-- <RouterLink
+          to="/roadmap"
+          class="flex items-center gap-2 p-2 rounded hover:bg-white/5 transition-colors"
+          @click="toggleMenu"
+        >
+          <Icon icon="mdi:map-marker-path" class="w-5 h-5 text-white" />
+          <span class="text-white">Roadmap</span>
+        </RouterLink> -->
         <a
           href="https://discord.gg/invite/yamp"
           target="_blank"

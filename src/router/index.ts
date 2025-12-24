@@ -5,6 +5,7 @@ import {
 } from "vue-router";
 import LandingPage from "../pages/LandingPage.vue";
 import TermsOfUse from "../pages/TermsOfUse.vue";
+import RoadmapPage from "../pages/RoadmapPage.vue";
 import NotFound from "../pages/NotFound.vue";
 
 export const routes = [
@@ -12,6 +13,11 @@ export const routes = [
     path: "/",
     name: "Landing",
     component: LandingPage,
+  },
+  {
+    path: "/roadmap",
+    name: "Roadmap",
+    component: RoadmapPage,
   },
   {
     path: "/terms-of-use",
