@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, reactive } from 'vue';
+
 const bulbColors = [
   '#ff4757', // warm red
   '#2ed573', // festive green
@@ -14,6 +16,69 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
   color: bulbColors[i % bulbColors.length],
   delay: (i * 0.15) % 2,
 }));
+
+const brokenBulbs = reactive(new Set<number>());
+const explodingBulbs = reactive(new Set<number>());
+
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  color: string;
+  angle: number;
+  velocity: number;
+  size: number;
+}
+
+const particles = ref<Particle[]>([]);
+let particleId = 0;
+
+function breakBulb(bulbId: number, color: string, event: MouseEvent) {
+  if (brokenBulbs.has(bulbId)) return;
+
+  // Add to exploding set for the crack animation
+  explodingBulbs.add(bulbId);
+
+  // Get position relative to the component
+  const target = event.currentTarget as HTMLElement;
+  const rect = target.getBoundingClientRect();
+  const containerRect = target.closest('.christmas-lights')?.getBoundingClientRect();
+
+  if (!containerRect) return;
+
+  const x = rect.left - containerRect.left + rect.width / 2;
+  const y = rect.top - containerRect.top + rect.height / 2;
+
+  // Create glass shard particles
+  const newParticles: Particle[] = [];
+  const particleCount = 8 + Math.floor(Math.random() * 5);
+
+  for (let i = 0; i < particleCount; i++) {
+    newParticles.push({
+      id: particleId++,
+      x,
+      y,
+      color,
+      angle: (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.5,
+      velocity: 30 + Math.random() * 40,
+      size: 2 + Math.random() * 3,
+    });
+  }
+
+  particles.value.push(...newParticles);
+
+  // Mark as broken after a tiny delay for the crack effect
+  setTimeout(() => {
+    brokenBulbs.add(bulbId);
+    explodingBulbs.delete(bulbId);
+  }, 100);
+
+  // Clean up particles after animation
+  setTimeout(() => {
+    const idsToRemove = new Set(newParticles.map(p => p.id));
+    particles.value = particles.value.filter(p => !idsToRemove.has(p.id));
+  }, 600);
+}
 </script>
 
 <template>
@@ -34,6 +99,11 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
         v-for="bulb in bulbs"
         :key="bulb.id"
         class="bulb-wrapper"
+        :class="{
+          'bulb-wrapper--broken': brokenBulbs.has(bulb.id),
+          'bulb-wrapper--exploding': explodingBulbs.has(bulb.id)
+        }"
+        @click="breakBulb(bulb.id, bulb.color, $event)"
       >
         <div class="bulb-cap" />
         <div
@@ -44,6 +114,7 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
           }"
         />
         <div
+          v-if="!brokenBulbs.has(bulb.id)"
           class="bulb-glow"
           :style="{
             '--bulb-color': bulb.color,
@@ -52,6 +123,21 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
         />
       </div>
     </div>
+
+    <!-- Explosion particles -->
+    <div
+      v-for="particle in particles"
+      :key="particle.id"
+      class="particle"
+      :style="{
+        '--start-x': `${particle.x}px`,
+        '--start-y': `${particle.y}px`,
+        '--end-x': `${particle.x + Math.cos(particle.angle) * particle.velocity}px`,
+        '--end-y': `${particle.y + Math.sin(particle.angle) * particle.velocity + 20}px`,
+        '--particle-color': particle.color,
+        '--particle-size': `${particle.size}px`,
+      }"
+    />
   </div>
 </template>
 
@@ -63,6 +149,7 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
   right: 20px;
   height: 28px;
   pointer-events: none;
+  overflow: visible;
 }
 
 .wire {
@@ -88,6 +175,17 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
   display: flex;
   flex-direction: column;
   align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.bulb-wrapper:hover:not(.bulb-wrapper--broken) {
+  transform: scale(1.15);
+}
+
+.bulb-wrapper:active:not(.bulb-wrapper--broken) {
+  transform: scale(0.95);
 }
 
 .bulb-cap {
@@ -159,6 +257,69 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
   50% {
     opacity: 0.8;
     transform: scale(1.3);
+  }
+}
+
+/* Broken bulb states */
+.bulb-wrapper--broken {
+  cursor: default;
+}
+
+.bulb-wrapper--broken .bulb {
+  background: linear-gradient(
+    135deg,
+    #2a2a2a 0%,
+    #1a1a1a 100%
+  );
+  animation: none;
+  opacity: 0.6;
+}
+
+.bulb-wrapper--broken .bulb::before {
+  opacity: 0.2;
+}
+
+.bulb-wrapper--exploding .bulb {
+  animation: shatter 0.1s ease-out forwards;
+}
+
+@keyframes shatter {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+}
+
+/* Explosion particles */
+.particle {
+  position: absolute;
+  left: var(--start-x);
+  top: var(--start-y);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  background: var(--particle-color);
+  border-radius: 1px;
+  pointer-events: none;
+  animation: explode 0.5s ease-out forwards;
+  box-shadow: 0 0 4px var(--particle-color);
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform:
+      translate(
+        calc(var(--end-x) - var(--start-x)),
+        calc(var(--end-y) - var(--start-y))
+      )
+      rotate(360deg);
+    opacity: 0;
   }
 }
 
