@@ -14,7 +14,7 @@ const bulbColors = [
 const bulbs = Array.from({ length: 18 }, (_, i) => ({
   id: i,
   color: bulbColors[i % bulbColors.length],
-  delay: (i * 0.15) % 2,
+  delay: (i * 0.5) % 2,
 }));
 
 const brokenBulbs = reactive(new Set<number>());

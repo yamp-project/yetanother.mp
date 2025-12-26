@@ -63,12 +63,12 @@ function goToAlphaSection() {
           href="https://forum.yetanother.mp/forum/"
           target="_blank"
           rel="noopener noreferrer"
-          class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-white text-sm font-medium"
+          class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-[#BC82F3] font-medium"
         >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.898 5.516 5 6.934V22l5.34-4.005C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8zm0 14h-.333L9 18v-2.417l-.641-.247C5.67 14.301 4 12.256 4 10c0-3.309 3.589-6 8-6s8 2.691 8 6-3.589 6-8 6z"/>
           </svg>
-          Forum
+          <span class="shiny-text">Forum</span>
         </a>
       </div>
 
@@ -76,7 +76,7 @@ function goToAlphaSection() {
       <div class="hidden sm:flex justify-center items-center gap-2.5">
         <!-- <RouterLink
           to="/roadmap"
-          class="flex justify-center items-center px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-white text-sm font-medium"
+          class="flex justify-center items-center px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-white font-medium"
         >
           Roadmap
         </RouterLink> -->
@@ -226,6 +226,30 @@ function goToAlphaSection() {
 <style scoped>
 .nav-with-grid {
   background-image: linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+}
+
+.shiny-text {
+  background: linear-gradient(
+    120deg,
+    #BC82F3 0%,
+    #BC82F3 40%,
+    #ffffff 50%,
+    #BC82F3 60%,
+    #BC82F3 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 .slide-fade-enter-active,
