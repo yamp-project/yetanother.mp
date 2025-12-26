@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 
 const bulbColors = [
   '#ff4757', // warm red
@@ -19,6 +19,12 @@ const bulbs = Array.from({ length: 18 }, (_, i) => ({
 
 const brokenBulbs = reactive(new Set<number>());
 const explodingBulbs = reactive(new Set<number>());
+
+// Check if all bulbs are broken for the short circuit effect
+const allBroken = computed(() => brokenBulbs.size === bulbs.length);
+
+// Random flicker delays for short circuit mode
+const flickerDelays = bulbs.map(() => Math.random() * 10);
 
 interface Particle {
   id: number;
@@ -82,7 +88,7 @@ function breakBulb(bulbId: number, color: string, event: MouseEvent) {
 </script>
 
 <template>
-  <div class="christmas-lights" aria-hidden="true">
+  <div class="christmas-lights" :class="{ 'short-circuit': allBroken }" aria-hidden="true">
     <!-- The wire/cable -->
     <svg class="wire" viewBox="0 0 1000 30" preserveAspectRatio="none">
       <path
@@ -111,14 +117,16 @@ function breakBulb(bulbId: number, color: string, event: MouseEvent) {
           :style="{
             '--bulb-color': bulb.color,
             '--twinkle-delay': `${bulb.delay}s`,
+            '--flicker-delay': `${flickerDelays[bulb.id]}s`,
           }"
         />
         <div
-          v-if="!brokenBulbs.has(bulb.id)"
+          v-if="!brokenBulbs.has(bulb.id) || allBroken"
           class="bulb-glow"
           :style="{
             '--bulb-color': bulb.color,
             '--twinkle-delay': `${bulb.delay}s`,
+            '--flicker-delay': `${flickerDelays[bulb.id]}s`,
           }"
         />
       </div>
@@ -275,8 +283,55 @@ function breakBulb(bulbId: number, color: string, event: MouseEvent) {
   opacity: 0.6;
 }
 
+/* Short circuit mode - chaotic flickering when all bulbs are broken */
+.short-circuit .bulb-wrapper--broken .bulb {
+  animation: shortCircuit 0.15s ease-in-out var(--flicker-delay) infinite;
+}
+
+@keyframes shortCircuit {
+  0%, 100% {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    opacity: 0.6;
+    filter: brightness(1);
+  }
+  10% {
+    background: linear-gradient(135deg, var(--bulb-color) 0%, color-mix(in srgb, var(--bulb-color) 70%, black) 100%);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  20% {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    opacity: 0.6;
+    filter: brightness(1);
+  }
+  50% {
+    background: linear-gradient(135deg, var(--bulb-color) 0%, color-mix(in srgb, var(--bulb-color) 70%, black) 100%);
+    opacity: 1;
+    filter: brightness(2);
+  }
+  60% {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    opacity: 0.4;
+  }
+}
+
 .bulb-wrapper--broken .bulb::before {
   opacity: 0.2;
+}
+
+.short-circuit .bulb-wrapper--broken .bulb-glow {
+  animation: shortCircuitGlow 0.15s ease-in-out var(--flicker-delay) infinite;
+}
+
+@keyframes shortCircuitGlow {
+  0%, 20%, 60%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  10%, 50% {
+    opacity: 0.9;
+    transform: scale(1.5);
+  }
 }
 
 .bulb-wrapper--exploding .bulb {
