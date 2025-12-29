@@ -19,7 +19,7 @@ onMounted(() => {
   snowflakes.value = Array.from({ length: count }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
-    size: Math.random() * 4 + 2,
+    size: Math.random() * 12 + 8,
     opacity: Math.random() * 0.6 + 0.2,
     duration: Math.random() * 8 + 8,
     delay: Math.random() * -15,
@@ -44,7 +44,7 @@ onMounted(() => {
         '--drift': `${flake.drift}px`,
         '--blur': `${flake.blur}px`,
       }"
-    />
+    >❅</div>
   </div>
 </template>
 
@@ -61,26 +61,12 @@ onMounted(() => {
   position: absolute;
   top: -20px;
   left: var(--x);
-  width: var(--size);
-  height: var(--size);
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, var(--opacity)),
-    rgba(200, 220, 255, calc(var(--opacity) * 0.5)) 50%,
-    transparent 70%
-  );
-  border-radius: 50%;
+  font-size: var(--size);
+  color: rgba(255, 255, 255, var(--opacity));
   filter: blur(var(--blur));
   animation: fall var(--duration) linear var(--delay) infinite;
   will-change: transform;
-}
-
-/* Add some crystalline snowflakes */
-.snowflake:nth-child(5n) {
-  background: none;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, calc(var(--opacity) * 0.8)),
-    inset 0 0 2px rgba(255, 255, 255, calc(var(--opacity) * 0.5));
+  text-shadow: 0 0 3px rgba(200, 220, 255, 0.5);
 }
 
 /* Larger distant flakes with more blur */
