@@ -7,12 +7,18 @@ import LandingPage from "../pages/LandingPage.vue";
 import TermsOfUse from "../pages/TermsOfUse.vue";
 import RoadmapPage from "../pages/RoadmapPage.vue";
 import NotFound from "../pages/NotFound.vue";
+import ShutdownPage from '../pages/Shutdown.vue';
 
 export const routes = [
   {
     path: "/",
     name: "Landing",
     component: LandingPage,
+  },
+  {
+    path: "/shutdown",
+    name: "Shutdown",
+    component: ShutdownPage,
   },
   {
     path: "/roadmap",

@@ -16,7 +16,7 @@ const discordMembers = ref(2642);
     </div>
     <div>
       <div class="text-3xl sm:text-4xl font-bold mb-2">Pre-Alpha</div>
-      <div class="text-white/60">Current Phase</div>
+      <div class="text-white/60">Ended in Phase</div>
     </div>
     <div>
       <div class="text-3xl sm:text-4xl font-bold mb-2">js / lua</div>

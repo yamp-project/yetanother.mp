@@ -15,10 +15,10 @@
       </p>
 
       <h2 class="text-3xl sm:text-4xl font-semibold mb-6">
-        What Are We Working On Exactly?
+        What We've been Working On Exactly?
       </h2>
       <p class="text-white/80 leading-relaxed mb-6 text-lg">
-        We are currently developing a <strong>GTA&nbsp;V mod</strong> designed
+        We were developing a <strong>GTA&nbsp;V mod</strong> designed
         to enhance both single-player and multiplayer experiences. This is yet
         another third-party project, offering something truly different from
         existing projects.

@@ -29,8 +29,6 @@ function goToAlphaSection() {
     <div
       class="relative w-full h-16 px-4 m-4.5 sm:px-5 rounded-[10px] outline outline-offset-[-1px] outline-white/10 flex justify-between items-center nav-with-grid backdrop-blur"
     >
-      <!-- Christmas Lights -->
-      <ChristmasLights />
       <div class="flex justify-start items-center gap-4 sm:gap-10">
         <!-- Logo -->
         <RouterLink to="/">
@@ -58,18 +56,6 @@ function goToAlphaSection() {
           </div>
         </RouterLink>
 
-        <!-- Forum link -->
-        <a
-          href="https://forum.yetanother.mp/forum/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-[10px] hover:bg-white/10 transition-colors text-[#BC82F3] font-medium"
-        >
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2C6.486 2 2 5.589 2 10c0 2.908 1.898 5.516 5 6.934V22l5.34-4.005C17.697 17.852 22 14.32 22 10c0-4.411-4.486-8-10-8zm0 14h-.333L9 18v-2.417l-.641-.247C5.67 14.301 4 12.256 4 10c0-3.309 3.589-6 8-6s8 2.691 8 6-3.589 6-8 6z"/>
-          </svg>
-          <span class="shiny-text">Forum</span>
-        </a>
       </div>
 
       <!-- Right Side Links -->
@@ -81,7 +67,7 @@ function goToAlphaSection() {
           Roadmap
         </RouterLink> -->
         <a
-          href="https://discord.gg/invite/yamp"
+          href="https://discord.gg/rMS8uWkvqK"
           target="_blank"
           rel="noopener noreferrer"
           class="flex justify-center items-center p-2 rounded-[10px] hover:bg-white/10 transition-colors text-white"
@@ -172,7 +158,7 @@ function goToAlphaSection() {
           <span class="text-white">Roadmap</span>
         </RouterLink> -->
         <a
-          href="https://discord.gg/invite/yamp"
+          href="https://discord.gg/rMS8uWkvqK"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-2 p-2 rounded hover:bg-white/5 transition-colors"

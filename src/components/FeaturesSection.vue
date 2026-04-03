@@ -43,7 +43,7 @@ const features: Feature[] = [
 
 <template>
   <section class="w-full max-w-6xl mx-auto mb-20 px-4">
-    <h2 class="text-center text-3xl sm:text-4xl font-bold mb-12">Why YAMP?</h2>
+    <h2 class="text-center text-3xl sm:text-4xl font-bold mb-12">Why did they shutdown YAMP?</h2>
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
     >

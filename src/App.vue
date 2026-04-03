@@ -14,26 +14,11 @@ onMounted(() => {
   refresh();
 });
 
-const showSnow = ref(true);
+const showSnow = ref(false);
 </script>
 
 <template>
   <div class="relative overflow-x-hidden">
-    <!-- Christmas Snowfall -->
-    <Transition name="fade">
-      <Snowfall v-if="showSnow" />
-    </Transition>
-
-    <!-- Snow Toggle Button -->
-    <button
-      @click="showSnow = !showSnow"
-      class="snow-toggle"
-      :class="{ active: showSnow }"
-      :title="showSnow ? 'Disable snowfall' : 'Enable snowfall'"
-    >
-      ❅
-    </button>
-
     <div class="text-white bg-zinc-950 relative">
       <BackgroundGrid class="pointer-events-none" />
       <NavigationBar class="z-50" />
