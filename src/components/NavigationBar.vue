@@ -5,7 +5,6 @@ import { Menu as MenuIcon, X as CloseIcon } from "lucide-vue-next";
 import AlphaAccessButton from "./AlphaAccessButton.vue";
 import StatusBadge from "./StatusBadge.vue";
 import UserProfile from "./UserProfile.vue";
-import ChristmasLights from "./christmas/ChristmasLights.vue";
 import { useAuth } from "../composables/useAuth";
 import router from "../router";
 

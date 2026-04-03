@@ -3,9 +3,8 @@ import NavigationBar from "./components/NavigationBar.vue";
 import BackgroundGrid from "./components/BackgroundGrid.vue";
 import HeroBottomBlur from "./components/HeroBottomBlur.vue";
 import Footer from "./components/Footer.vue";
-import Snowfall from "./components/christmas/Snowfall.vue";
 
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useAuth } from "./composables/useAuth";
 
 // Kick off auth state initialisation in the browser.
@@ -14,7 +13,6 @@ onMounted(() => {
   refresh();
 });
 
-const showSnow = ref(false);
 </script>
 
 <template>
