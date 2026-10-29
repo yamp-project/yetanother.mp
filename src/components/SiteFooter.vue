@@ -94,7 +94,7 @@
 
             <div class="footer-bottom">
                 <span>© {{ new Date().getFullYear() }} YAMP</span>
-                <span>Independant modding group</span>
+                <span>Independent modding group</span>
                 <button
                     class="back-top"
                     type="button"
