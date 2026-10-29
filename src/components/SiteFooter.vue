@@ -2,7 +2,7 @@
     import { onMounted, onUnmounted, ref } from 'vue'
     import AsciiWord from './AsciiWord.vue'
 
-    const discord = 'https://discord.gg/zjBwWjA4Gn'
+    const discord = 'https://discord.gg/yamp'
 
     const reveal = ref(0)
     const footer = ref<HTMLElement>()

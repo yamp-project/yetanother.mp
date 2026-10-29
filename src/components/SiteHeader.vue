@@ -90,7 +90,7 @@
         </nav>
         <a
             class="header-discord icon-button"
-            href="https://discord.gg/zjBwWjA4Gn"
+            href="https://discord.gg/yamp"
             target="_blank"
             rel="noopener"
             aria-label="Join our Discord"
