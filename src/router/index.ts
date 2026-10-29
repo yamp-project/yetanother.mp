@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
+import { createRouter, createWebHistory, createMemoryHistory, START_LOCATION } from 'vue-router'
 import LandingPage from '../pages/LandingPage.vue'
 import NotFound from '../pages/NotFound.vue'
 
@@ -9,7 +9,8 @@ export function createSiteRouter() {
             { path: '/', name: 'Landing', component: LandingPage },
             { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
         ],
-        scrollBehavior(to, _from, savedPosition) {
+        scrollBehavior(to, from, savedPosition) {
+            if (from === START_LOCATION) return { top: 0 }
             if (savedPosition) return savedPosition
             if (to.hash === '#home') return { el: '#home' }
             return { top: 0 }
