@@ -240,7 +240,7 @@
 
             tilt.lerp(still ? new THREE.Vector2() : pointer, Math.min(1, delta * 3))
             logo.rotation.set(
-                -tilt.y * 0.35 + (still ? 0 : Math.sin(time * 0.6) * 0.05),
+                tilt.y * 0.35 + (still ? 0 : Math.sin(time * 0.6) * 0.05),
                 tilt.x * 0.5 + (still ? -0.25 : Math.sin(time * 0.35) * 0.3),
                 0,
             )
