@@ -1,18 +1,51 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/yamp.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Preconnects -->
-    <link rel="preconnect" href="https://discord.gg" crossorigin />
-    <link rel="preconnect" href="https://github.com" crossorigin />
-    <!--head-tags-->
-    <link rel="stylesheet" href="/src/style.css" />
-  </head>
-  <body>
-    <div id="app"><!--ssr-outlet--></div>
-    <!--preload-links-->
-    <script type="module" src="/src/entry-client.ts"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <meta
+            name="theme-color"
+            content="#09090a"
+        />
+        <style>
+            html {
+                color-scheme: dark;
+                color: #ededea;
+                background: #09090a;
+            }
+
+            body {
+                margin: 0;
+            }
+        </style>
+        <link
+            rel="stylesheet"
+            href="/src/assets/main.css"
+        />
+        <meta
+            property="og:site_name"
+            content="YAMP — Yet Another M* Project"
+        />
+        <meta
+            property="og:type"
+            content="website"
+        />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/favicon.svg"
+        />
+        <!--head-tags-->
+        <!--preload-links-->
+    </head>
+    <body>
+        <div id="app"><!--ssr-outlet--></div>
+        <script
+            type="module"
+            src="/src/entry-client.ts"
+        ></script>
+    </body>
 </html>

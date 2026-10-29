@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.deploy/
+.qa/
+test-results/
+playwright-report/
+package-lock.json
+*.tsbuildinfo
+.env*
+public/images/

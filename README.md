@@ -1,70 +1,68 @@
-# YAMP Landing Page
+# YAMP — Yet Another M* Project
 
-A modern, blazing-fast landing page for **Y**et **A**nother **M**\* **P**roject – a GTA V multiplayer platform.
+The comeback website, migrated from `../website_main`. The landing page keeps
+its fullscreen composition, compact MODUS card, “FiveM on steroids” teaser,
+ASCII artwork, custom cursor, and full scrolling footer. The navbar's Modus
+button is disabled and marked “Soon”.
 
-## Tech stack
+## Development
 
-- [Vue 3](https://vuejs.org/) + [Vite](https://vitejs.dev/) (SFCs with `<script setup>`)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
-- [Lucide Icons](https://lucide.dev/)
-- [Bun](https://bun.sh/) for dependency management & scripts
+Requires Node.js 22.18+ or 24.12+ and npm. CI uses Node.js 24.
 
-## Getting started
-
-1. Install Bun, because we're not animals
-
-   ```bash
-   curl -fsSL https://bun.sh/install | bash
-   ```
-
-2. Clone & install dependencies:
-
-   ```bash
-   git clone https://github.com/yamp-project/yetanother.mp
-   cd yetanother.mp
-   bun install
-   ```
-
-3. Start the dev server (Hot Module Reload enabled):
-
-   ```bash
-   bun run dev
-   ```
-
-   The site is now available at `http://localhost:5173` (or the next free port).
-
-## Build for production
-
-```bash
-bun run build
+```sh
+npm ci
+npm run dev
 ```
 
-The static assets are output to `dist/`. Serve them with any static HTTP server or your hosting of choice.
+The dev server runs at `http://127.0.0.1:5173`. Pass `--port` or `--host` after
+`--` to override it, or supply `PORT` and `HOST` environment variables. Environment
+files are examples only; supply production variables through the systemd service.
 
-## Preview the production build locally
+## Build and run
 
-```bash
-bun run preview
+```sh
+npm run build
+npm start
 ```
 
-## Folder structure
+Build produces `dist/client` and `dist/server`. `npm start` (or `npm run preview`)
+serves the production build on `0.0.0.0:5173` by default. The existing
+`NODE_ENV=production node server.js` invocation is also supported. This remains
+an Express server-rendered app; do not serve only `dist/client` as a static site.
+Production requires `server.js`, both `dist` directories, and production dependencies.
 
-- `src/components` – Reusable UI components
-- `src/pages` – Route-level page components
-- `src/router` – Vue-Router configuration
-- `src/assets` – Static assets (images, SVGs, etc.)
+The deployment workflow installs from `package-lock.json`, builds with npm, then
+stages only runtime files and production dependencies in `.deploy/`. It retains
+the existing rsync destination, GitHub secrets, and `yetanothermp` systemd service.
+The target must run a supported Node.js version. Pushing to `main` or manually
+running the workflow deploys it; local edits do not deploy anything.
 
-## Contributing
+## Routes and content
 
-Pull requests are welcome!
+- `/`: comeback landing page in `src/pages/LandingPage.vue`.
+- Every other page URL: `src/pages/NotFound.vue`, with an HTTP 404 status and
+  `noindex` metadata. The previous shutdown, roadmap, terms, and auth UI are removed.
+- `src/components`: the shared header, footer, ASCII scenes, and cursor.
+- Component and page styles live in their Vue files. `src/assets/main.css` contains
+  fonts, theme variables, resets, and shared layout rules.
+- `src/metadata.ts`: page titles, descriptions, and indexing metadata.
+- `public/sitemap.xml`: only the landing page. `public/credits.txt` credits reused assets.
 
-1. Fork the repo and create your branch: `git checkout -b feat/your-feature`.
-2. Install deps & make sure the dev server runs.
-3. Follow conventional commit messages.
-4. Ensure `bun run build` completes without warnings.
-5. Open a pull request.
+Each SSR request gets a separate Vue app and router. The browser hydrates the
+server markup; the return-home link and browser history update the route and metadata.
+Artwork initializes only in the browser, stops when hidden, and respects reduced
+motion. There are no auth/API calls, analytics, or remote font requests.
 
-## License
+Global CSS loads directly from the HTML. In development, the server also links the
+rendered components' styles through Vite so refreshes stay styled before hydration.
 
-MIT
+## Formatting
+
+Source files use four spaces, expanded Vue attributes, and multiline CSS rules.
+EditorConfig and Prettier keep the convention consistent. Generated files,
+the npm lockfile, and environment files are excluded from formatting.
+
+```sh
+npm run format
+npm run format:check
+```

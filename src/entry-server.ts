@@ -1,49 +1,55 @@
-import { renderToString } from "@vue/server-renderer";
-import { createVueApp } from "./app";
-import { renderHeadToString } from "@vueuse/head";
+import { renderToString } from '@vue/server-renderer'
+import { createVueApp } from './app'
+import { getPageMetadata } from './metadata'
 
-export async function render(url: string, manifest?: Record<string, string[]>): Promise<[string, string, string, number]> {
-  const { app, router, head } = createVueApp();
+type Manifest = Record<string, string[]>
 
-  router.push(url);
-  await router.isReady();
+const escapeHtml = (value: string) =>
+    value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-  const statusCode = router.currentRoute.value.name === "NotFound" ? 404 : 200;
-  
-  const ctx: { modules?: Set<string> } = {};
-  const html = await renderToString(app, ctx);
+function renderPreloadLink(file: string) {
+    const href = escapeHtml(file)
 
-  // Serialize head on the server
-  const { headTags } = await renderHeadToString(head);
-
-  let preloadLinks = "";
-  if (manifest && ctx.modules) {
-    const seen = new Set<string>();
-    for (const id of ctx.modules) {
-      preloadLinks += renderPreloadLinks(id, manifest, seen);
+    if (file.endsWith('.js')) {
+        return `<link rel="modulepreload" crossorigin href="${href}">`
     }
-  }
 
-  return [html, preloadLinks, headTags, statusCode];
+    if (file.endsWith('.css')) {
+        return `<link rel="stylesheet" href="${href}">`
+    }
+
+    return ''
 }
 
-function renderPreloadLinks(
-  moduleId: string,
-  manifest: Record<string, string[]>,
-  seen: Set<string>
-) {
-  let links = "";
-  const files = manifest[moduleId];
-  if (!files) return links;
+export async function render(
+    url: string,
+    manifest?: Manifest,
+): Promise<[string, string, string, number, string[]]> {
+    const { app, router } = createVueApp()
 
-  for (const file of files) {
-    if (seen.has(file)) continue;
-    seen.add(file);
-    if (file.endsWith(".js")) {
-      links += `<link rel="modulepreload" crossorigin href="${file}">`;
-    } else if (file.endsWith(".css")) {
-      links += `<link rel="stylesheet" href="${file}">`;
+    await router.push(url)
+    await router.isReady()
+
+    const notFound = router.currentRoute.value.name === 'NotFound'
+    const metadata = getPageMetadata(notFound)
+    const context: { modules?: Set<string> } = {}
+    const html = await renderToString(app, context)
+
+    const files = new Set<string>()
+
+    for (const id of context.modules ?? []) {
+        for (const file of manifest?.[id] ?? []) {
+            files.add(file)
+        }
     }
-  }
-  return links;
+
+    const preloadLinks = [...files].map(renderPreloadLink).join('')
+    const head = `<title>${escapeHtml(metadata.title)}</title>
+    <meta name="description" content="${escapeHtml(metadata.description)}">
+    <meta name="robots" content="${metadata.robots}">
+    <meta property="og:title" content="${escapeHtml(metadata.title)}">
+    <meta property="og:description" content="${escapeHtml(metadata.description)}">
+    ${notFound ? '' : '<link rel="canonical" href="https://yetanother.mp/">'}`
+
+    return [html, preloadLinks, head, notFound ? 404 : 200, [...(context.modules ?? [])]]
 }

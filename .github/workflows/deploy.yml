@@ -1,50 +1,58 @@
 name: Build and Deploy
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch: {}
+    push:
+        branches:
+            - main
+    workflow_dispatch: {}
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    env:
-      BUILD_DIR: .
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        env:
+            BUILD_DIR: .deploy
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: npm
 
-      - name: Install dependencies
-        run: bun install
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Build project (client & server bundles)
-        run: bun run build
+            - name: Build project (client & server bundles)
+              run: npm run build
 
-      - name: Deploy to server via rsync
-        uses: burnett01/rsync-deployments@7.0.2
-        with:
-          switches: -avzr --delete
-          path: "${{ env.BUILD_DIR }}/"
-          remote_path: "/var/www/yetanother.mp/"
-          remote_host: ${{ secrets.VPN_HOST }}
-          remote_user: ${{ secrets.VPN_USER }}
-          remote_port: ${{ secrets.VPN_PORT }} # defaults to 22
-          remote_key: ${{ secrets.VPN_SSH_KEY }}
+            - name: Stage production files and dependencies
+              run: |
+                  mkdir -p .deploy
+                  cp -R dist .deploy/dist
+                  cp server.js package.json package-lock.json .deploy/
+                  npm ci --omit=dev --prefix .deploy
 
-      - name: Restart service
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPN_HOST }}
-          username: ${{ secrets.VPN_USER }}
-          port: ${{ secrets.VPN_PORT }}
-          key: ${{ secrets.VPN_SSH_KEY }}
-          script: |
-            sudo systemctl restart yetanothermp
+            - name: Deploy to server via rsync
+              uses: burnett01/rsync-deployments@7.0.2
+              with:
+                  switches: -avzr --delete --exclude=.env --exclude=.env.local
+                  path: '${{ env.BUILD_DIR }}/'
+                  remote_path: '/var/www/yetanother.mp/'
+                  remote_host: ${{ secrets.VPN_HOST }}
+                  remote_user: ${{ secrets.VPN_USER }}
+                  remote_port: ${{ secrets.VPN_PORT }} # defaults to 22
+                  remote_key: ${{ secrets.VPN_SSH_KEY }}
+
+            - name: Restart service
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                  host: ${{ secrets.VPN_HOST }}
+                  username: ${{ secrets.VPN_USER }}
+                  port: ${{ secrets.VPN_PORT }}
+                  key: ${{ secrets.VPN_SSH_KEY }}
+                  script: |
+                      sudo systemctl restart yetanothermp

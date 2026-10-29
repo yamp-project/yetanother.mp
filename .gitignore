@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 .env
+.qa/
+test-results/
+playwright-report/
+.deploy/
+*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*

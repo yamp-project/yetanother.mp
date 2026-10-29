@@ -1,0 +1,15 @@
+YAMP — Yet Another M* Project
+
+PHOTOGRAPHY
+After hours — Roger Zhou, via Pexels:
+https://www.pexels.com/photo/skyline-skyscrapers-at-night-14782523/
+https://www.pexels.com/license/
+The photograph is decorative reference imagery, not an in-game screenshot.
+
+TYPOGRAPHY
+Inter by Rasmus Andersson — SIL Open Font License.
+Self-hosted through Fontsource.
+
+ARTWORK
+The memory-patching animation illustrates synthetic x64 instructions.
+It is not connected to a running game or client.
