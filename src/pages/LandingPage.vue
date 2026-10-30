@@ -190,19 +190,27 @@
 
     @media (max-width: 760px) {
         .hero {
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hero-copy {
+            padding: 24px 0 0;
+            text-align: center;
         }
 
         .hero-art {
-            position: absolute;
-            right: -16px;
-            top: 0;
-            width: 52%;
-            opacity: 0.2;
-            pointer-events: none;
+            flex: 0 1 min(440px, 100vw - 2 * var(--gutter));
+            width: 100%;
+            height: auto;
+            align-items: stretch;
         }
 
         .art-stage {
+            height: auto;
+            max-height: none;
             transform: none;
         }
 
@@ -232,7 +240,7 @@
 
     @media (max-width: 760px) and (max-height: 600px) {
         .hero-copy {
-            padding: 16px 0;
+            padding: 16px 0 0;
         }
 
         .roadmap-content {
@@ -251,10 +259,13 @@
     @media (max-height: 500px) and (min-width: 560px) {
         .hero {
             display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
         }
 
         .hero-copy {
             padding: 0;
+            text-align: left;
         }
 
         .hero-art {

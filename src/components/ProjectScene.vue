@@ -215,7 +215,6 @@
 
         const accent = new THREE.Color('#c59977')
         const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-        const compact = window.matchMedia('(max-width: 760px)')
         const pointer = new THREE.Vector2()
         const tilt = new THREE.Vector2()
         let frame = 0
@@ -225,7 +224,7 @@
         let visible = true
 
         function update(time: number, delta: number) {
-            const still = motion.matches || compact.matches
+            const still = motion.matches
 
             for (const piece of meshes) {
                 const progress = still ? 1 : easeOut((time - piece.delay) / assembleSeconds)
@@ -321,8 +320,7 @@
             cancelAnimationFrame(frame)
             frame = 0
             last = 0
-            if (visible && !document.hidden && !motion.matches && !compact.matches)
-                frame = requestAnimationFrame(tick)
+            if (visible && !document.hidden && !motion.matches) frame = requestAnimationFrame(tick)
             else update(current, 0)
         }
 
@@ -381,7 +379,6 @@
         window.addEventListener('pointermove', onPointer, { passive: true })
         document.addEventListener('visibilitychange', sync)
         motion.addEventListener('change', sync)
-        compact.addEventListener('change', sync)
 
         resize()
         sync()
@@ -394,7 +391,6 @@
             window.removeEventListener('pointermove', onPointer)
             document.removeEventListener('visibilitychange', sync)
             motion.removeEventListener('change', sync)
-            compact.removeEventListener('change', sync)
             scene.traverse((object) => {
                 if (!(object instanceof THREE.Mesh || object instanceof THREE.Points)) return
                 object.geometry.dispose()

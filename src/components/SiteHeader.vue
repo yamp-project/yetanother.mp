@@ -275,7 +275,6 @@
         }
 
         .main-navigation {
-            display: none;
             position: absolute;
             top: 100%;
             left: 0;
@@ -286,10 +285,31 @@
             flex-direction: column;
             align-items: stretch;
             gap: 0;
+            visibility: hidden;
+            opacity: 0;
+            clip-path: inset(0 0 100% 0);
+            transition:
+                clip-path 0.35s var(--ease),
+                opacity 0.25s,
+                visibility 0s 0.35s;
         }
 
         .main-navigation.open {
-            display: flex;
+            visibility: visible;
+            opacity: 1;
+            clip-path: inset(0 0 -1px 0);
+            transition:
+                clip-path 0.35s var(--ease),
+                opacity 0.25s;
+        }
+
+        .nav-project {
+            transform: translateY(-6px);
+            transition: transform 0.35s var(--ease);
+        }
+
+        .main-navigation.open .nav-project {
+            transform: none;
         }
 
         .nav-project {
